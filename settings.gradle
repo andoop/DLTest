@@ -1,0 +1,1 @@
+include ':app', ':dllib', ':main_plugin_a', ':main_plugin_b', ':interactlib'

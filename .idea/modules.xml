@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DLTest.iml" filepath="$PROJECT_DIR$/DLTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dllib/dllib.iml" filepath="$PROJECT_DIR$/dllib/dllib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/interactlib/interactlib.iml" filepath="$PROJECT_DIR$/interactlib/interactlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/main_plugin_a/main_plugin_a.iml" filepath="$PROJECT_DIR$/main_plugin_a/main_plugin_a.iml" />
+      <module fileurl="file://$PROJECT_DIR$/main_plugin_b/main_plugin_b.iml" filepath="$PROJECT_DIR$/main_plugin_b/main_plugin_b.iml" />
+    </modules>
+  </component>
+</project>
