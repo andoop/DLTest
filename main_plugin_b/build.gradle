@@ -22,10 +22,12 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    //去除v7中的v4包，防止跟宿主v4冲突
     compile('com.android.support:appcompat-v7:23.4.0') {
         exclude module: 'support-v4'
     }
     compile project(':dllib')
+    //私有引用，打包时不会包含
     provided files('../interactlib/build/libs/interactlib.jar')
    // compile project(':interactlib')
 }

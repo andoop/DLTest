@@ -2,7 +2,7 @@
 ###百度dl框架研究学习demo
 ####关于dl框架
 1. 插件加载框架
-2. 与DLoad（动态加载，我的另一个工程）原理一样，但是封装处理的很好，Dload在此
+2. 与DLoad（动态加载，我的另一个工程）原理一样，但是封装处理的很好，[Dload在此](https://github.com/andoop/Dload)
 3. 在插件（动态包中）支持R访问资源（在Dload中，我们是通过流来获取图片资源的）
 4. 可维护多个插件（动态包），Dload中，我们只做了加载一个动态包的功能
 5. 实际开发中，可直接在dl框架上修改使用即可，还是比较实用的
@@ -202,4 +202,224 @@
 ---
 ####插件打包使用
 
+插件应该从服务端下载，demo中为了演示方便，将插件APk通过adb命令push到了sdcard的dltest文件夹下
 
+task命令如下
+
+	def dlPath = '/sdcard/dltest'
+	def upload = { ->
+	        try {
+				//创建dltest文件夹
+	            exec {
+	                commandLine 'E:/android_dev/sdk/sdk/platform-tools/adb.exe', 'shell', 'mkdir', dlPath
+	            }
+	        }
+	        catch (ignored) {
+	        }
+	
+	        try{
+				//将所有工程中生成的apk上传到dltest文件夹中
+	            exec {
+	                commandLine 'E:/android_dev/sdk/sdk/platform-tools/adb.exe', 'push', project.name + '-debug.apk', dlPath
+	                workingDir project.projectDir.toString() + '/build/outputs/apk/'
+	            }
+	        }
+	        catch (ignored){}
+	    }
+	
+	    task uploadDebug << {
+	        upload()
+	    }
+
+最后执行uploadDebug任务即可
+
+在这里不用通过dx命令再次处理插件包了，是因为这里的插件包是apk文件，apk文件中的.class文件已经被处理过了
+
+---
+####dl原理分析
+
+#####占坑
+
+     <activity android:name="com.ryg.dynamicload.DLProxyActivity"/>
+        <activity android:name="com.ryg.dynamicload.DLProxyFragmentActivity"/>
+        <service android:name="com.ryg.dynamicload.DLProxyService"
+            android:enabled="true"
+            android:exported="true"/>
+>插件中的Activity，FragmentActivity，service要分别继承dl的DLBasePluginActivity、DLBasePluginFragmentActivity和DLBasePluginService
+
+>dl中的DLProxyActivity，DLProxyFragmentActivity，DLProxyService会代理插件中Activity，FragmentActivity，service的生命周期
+
+---
+#####插件中组件关联代理组件
+以Activity为例：
+DLProxyActivity实现了DLAttachable接口
+
+	public interface DLAttachable {
+	    public void attach(DLPlugin proxyActivity, DLPluginManager pluginManager);
+	}
+
+>他调用attach方法将被代理的Activity传过来（插件中继承了DLBasePluginActivity的Activity）
+
+
+DLBasePluginActivity实现了DLPlugin,DLPlugin如下
+
+	public interface DLPlugin {
+	
+	    public void onCreate(Bundle savedInstanceState);
+	    public void onStart();
+	    public void onRestart();
+	    public void onActivityResult(int requestCode, int resultCode, Intent data);
+	    public void onResume();
+	    public void onPause();
+	    public void onStop();
+	    public void onDestroy();
+		//调用这里的attach，将代理Activity传入到了DLBasePluginActivity中（插件中Activity）
+	    public void attach(Activity proxyActivity, DLPluginPackage pluginPackage);
+	    public void onSaveInstanceState(Bundle outState);
+	    public void onNewIntent(Intent intent);
+	    public void onRestoreInstanceState(Bundle savedInstanceState);
+	    public boolean onTouchEvent(MotionEvent event);
+	    public boolean onKeyUp(int keyCode, KeyEvent event);
+	    public void onWindowAttributesChanged(LayoutParams params);
+	    public void onWindowFocusChanged(boolean hasFocus);
+	    public void onBackPressed();
+	    public boolean onCreateOptionsMenu(Menu menu);
+	    public boolean onOptionsItemSelected(MenuItem item);
+	}
+
+>都是Activity的生命周期方法
+
+在DLProxyActivity中
+
+	@Override
+	    protected void onStart() {
+	        mRemoteActivity.onStart();
+	        super.onStart();
+	    }
+	
+	    @Override
+	    protected void onRestart() {
+	        mRemoteActivity.onRestart();
+	        super.onRestart();
+	    }
+	
+	    @Override
+	    protected void onResume() {
+	        mRemoteActivity.onResume();
+	        super.onResume();
+	    }
+	
+	    @Override
+	    protected void onPause() {
+	        mRemoteActivity.onPause();
+	        super.onPause();
+	    }
+
+>摘出了部分代码，mRemoteActivity就是被代理的DLBasePluginActivity（插件中的Activity）
+
+---
+#####插件中为什么可以通过R来访问图片呢？
+
+重写Activity中的 getAssets()和getResources()并返回自己的重写构建AssetManager，（AssetManager中对应的资源路径，改为插件路径即可）和由此生成的Resources即可，
+
+dl中体现如下：（DLPluginManager中）
+
+	  AssetManager assetManager = createAssetManager(dexPath);
+	  Resources resources = createResources(assetManager);
+
+---
+	private AssetManager createAssetManager(String dexPath) {
+	        try {
+	            AssetManager assetManager = AssetManager.class.newInstance();
+	            Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
+	            addAssetPath.invoke(assetManager, dexPath);
+	            return assetManager;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	
+	    }
+	
+	    private Resources createResources(AssetManager assetManager) {
+	        Resources superRes = mContext.getResources();
+	        Resources resources = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
+	        return resources;
+	    }
+>dexPath即为插件路径，例如：/sdcard/dltest/xxx.apk
+
+---
+#####怎样实例化插件中类的呢（DLPluginManager中）
+
+	 private DexClassLoader createDexClassLoader(String dexPath) {
+	        File dexOutputDir = mContext.getDir("dex", Context.MODE_PRIVATE);
+	        dexOutputPath = dexOutputDir.getAbsolutePath();
+			//初始化一个dexclassloader
+	        DexClassLoader loader = new DexClassLoader(dexPath, dexOutputPath, mNativeLibDir, mContext.getClassLoader());
+	        return loader;
+	    }
+
+---
+	       DexClassLoader dexClassLoader = createDexClassLoader(dexPath);
+	        AssetManager assetManager = createAssetManager(dexPath);
+	        Resources resources = createResources(assetManager);
+	        // create pluginPackage
+	        pluginPackage = new DLPluginPackage(dexClassLoader, resources, packageInfo);
+	        mPackagesHolder.put(packageInfo.packageName, pluginPackage);
+
+>每一个插件都会对应一个dexclassloder，生成的dexclassload会被封装到DLPluginPackage对象中，而这个对象会被放到以插件包名为键的map中，这样插件和dexclassloader就一一对应了
+
+---
+
+	  protected void launchTargetActivity() {
+	        try {
+				//根据类名生成一个插件中Activity的对象
+	            Class<?> localClass = getClassLoader().loadClass(mClass);
+	            Constructor<?> localConstructor = localClass.getConstructor(new Class[] {});
+	            Object instance = localConstructor.newInstance(new Object[] {});
+				//生成的插件中Activity的对象
+	            mPluginActivity = (DLPlugin) instance;
+				//代理Activity关联插件中的Activity
+	            ((DLAttachable) mProxyActivity).attach(mPluginActivity, mPluginManager);
+	            Log.d(TAG, "instance = " + instance);
+	            // attach the proxy activity and plugin package to the mPluginActivity
+				//插件中Activity关联代理Activity
+	            mPluginActivity.attach(mProxyActivity, mPluginPackage);
+	
+	            Bundle bundle = new Bundle();
+	            bundle.putInt(DLConstants.FROM, DLConstants.FROM_EXTERNAL);
+	            mPluginActivity.onCreate(bundle);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+>上面是生成插件中Activity对象的过程，插件中service对象生成与关联代理的流程，是类似的，这个不过多讨论了
+
+---
+#####在插件中使用上下文时，慎用this
+插件中的Activity最后是被当做普通的类，通过反射得到其实例的，系统不会管理器生命周期，通过this获取上下文已经不行了，但是dl为我们提供了关键字that，that会在不同的情况下，指向本Activity或者代理Activity，所以，在使用this行不通的情况下，可以使用that。
+
+---
+####注意点
+
+插件和宿主之间的桥梁其实是接口，如demo中宿主和插件b之间相互调用的接口，宿主和插件b都依赖了interactlib工程，但是插件b打包的时候，却不能包含任何接口文件，否者会报异常，demo中处理如下：
+
+	dependencies {
+	    compile fileTree(include: ['*.jar'], dir: 'libs')
+	    testCompile 'junit:junit:4.12'
+		//去除v7中的v4包，防止跟宿主v4冲突
+	    compile('com.android.support:appcompat-v7:23.4.0') {
+	        exclude module: 'support-v4'
+	    }
+	    compile project(':dllib')
+		//私有引用，打包时不会包含
+	    provided files('../interactlib/build/libs/interactlib.jar')
+	}
+>上面是插件b的dependencies
+
+---
+以上就是dl的使用方法，还有它的原理解析，具体使用还是请参考demo，
+#####更多学习>>dl 源码地址：
+#####https://github.com/singwhatiwanna/dynamic-load-apk
+
+#####欢迎关注andoop,周一、二内容更新，干货永不断！
