@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     private void initData() {
-        String pluginFolder = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"DynamicLoadHost";
+        String pluginFolder = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"dltest";
         File file = new File(pluginFolder);
 
         File[] plugins = file.listFiles();
@@ -82,7 +82,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 item.launcherServiceName = item.packageInfo.services[0].name;
             }
             mPluginItems.add(item);
-            DLPluginManager.getInstance(this).loadApk(item.pluginPath);
+            DLPluginManager.getInstance(this).loadApk(item.pluginPath,false);
         }
 
         mListView.setAdapter(mPluginAdapter);

@@ -10,7 +10,6 @@ import com.andoop.android.interactlib.InterfaceManager;
 import com.ryg.dynamicload.DLBasePluginFragmentActivity;
 
 public class MainActivity extends DLBasePluginFragmentActivity {
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +26,6 @@ public class MainActivity extends DLBasePluginFragmentActivity {
                 Toast.makeText(MainActivity.this.that, hostMethod, Toast.LENGTH_SHORT).show();
             }
         });
-
         InterfaceManager.setPlugin(new IPlugin() {
             @Override
             public String pulginMethod(String s) {

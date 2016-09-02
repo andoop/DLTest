@@ -12,7 +12,7 @@ buildscript {
     }
 }
 
-def dlPath = '/sdcard/DynamicLoadHost'
+def dlPath = '/sdcard/dltest'
 
 
 allprojects {
