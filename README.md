@@ -1,5 +1,6 @@
 ## DLTest
 ###百度dl框架研究学习demo
+###github:https://github.com/andoop/DLTest
 ####关于dl框架
 1. 插件加载框架
 2. 与DLoad（动态加载，我的另一个工程）原理一样，但是封装处理的很好，[Dload在此](https://github.com/andoop/Dload)

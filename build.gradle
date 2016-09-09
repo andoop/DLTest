@@ -12,6 +12,7 @@ buildscript {
     }
 }
 
+
 def dlPath = '/sdcard/dltest'
 
 
@@ -20,7 +21,7 @@ allprojects {
         jcenter()
     }
 
-    def upload = { ->
+    def upload = {
         try {
             exec {
                 commandLine 'E:/android_dev/sdk/sdk/platform-tools/adb.exe', 'shell', 'mkdir', dlPath

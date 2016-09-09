@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h2>DLTest</h2>
+<h3>百度dl框架研究学习demo</h3>
+<h3>github:https://github.com/andoop/DLTest</h3>
+<h4>关于dl框架</h4>
+<ol>
+<li>插件加载框架</li>
+<li>与DLoad（动态加载，我的另一个工程）原理一样，但是封装处理的很好，<a href="https://github.com/andoop/Dload">Dload在此</a></li>
+<li>在插件（动态包中）支持R访问资源（在Dload中，我们是通过流来获取图片资源的）</li>
+<li>可维护多个插件（动态包），Dload中，我们只做了加载一个动态包的功能</li>
+<li>实际开发中，可直接在dl框架上修改使用即可，还是比较实用的</li>
+<li>虽然也可以加载还有.so文件的插件（动态包，下面都统一叫做“插件”），但是会有好多问题的</li>
+</ol>
+<hr />
+<h4>先上demo，一睹为快</h4>
+<img src="http://i.imgur.com/AYYo2Cz.png" width = "230" height = "350" alt="首页"/>
+<blockquote>
+<h5>demo首页，显示插件列表，有两个插件：main_plugin_a和main_plugin_b</h5>
+</blockquote>
+<hr />
+<h1></h1>
+<img src="http://i.imgur.com/x4U0f7F.png" width = "230" height = "350" alt="首页"/>
+<blockquote>
+<h5>进入main_plugin_a中</h5>
+</blockquote>
+<hr />
+<h1></h1>
+<img src="http://i.imgur.com/s2bPHZD.png" width = "230" height = "350" alt="首页"/>
+<blockquote>
+<h5>开启main_plugin_a中的service</h5>
+</blockquote>
+<hr />
+<h1></h1>
+<img src="http://i.imgur.com/yAjzNYO.png" width = "230" height = "350" alt="首页"/>
+<blockquote>
+<h5>关闭main_plugin_a中的service</h5>
+</blockquote>
+<hr />
+<h1></h1>
+<img src="http://i.imgur.com/Jh2S24g.png" width = "230" height = "350" alt="首页"/>
+<blockquote>
+<h5>打开main_plugin_a中另一个activity</h5>
+</blockquote>
+<hr />
+<h1></h1>
+<img src="http://i.imgur.com/31Tcm5i.png" width = "230" height = "350" alt="首页"/>
+<blockquote>
+<p>进入插件main_plugin_b</p>
+</blockquote>
+<hr />
+<h1></h1>
+<img src="http://i.imgur.com/iEqS3sv.png" width = "230" height = "350" alt="首页"/>
+<blockquote>
+<p>在插件b中调用宿主方法</p>
+</blockquote>
+<hr />
+<h1></h1>
+<img src="http://i.imgur.com/4gXfnoA.png" width = "230" height = "350" alt="首页"/>
+<blockquote>
+<p>在宿主中调用插件main_plugin_b中的方法</p>
+</blockquote>
+<hr />
+<h1></h1>
+<h4>分析一下demo代码</h4>
+<h5>看一下宿主工程</h5>
+<blockquote>
+<p>MainActivity 的initData方法</p>
+</blockquote>
+<pre><code>     private void initData() {
+            //得到插件存放的位置，demo中用到的插件存放到了sdcard的dltest文件夹下
+            String pluginFolder = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+&quot;dltest&quot;;
+            File file = new File(pluginFolder);
+
+            File[] plugins = file.listFiles();
+            if (plugins == null || plugins.length == 0) {
+                mNoPluginTextView.setVisibility(View.VISIBLE);
+                return;
+            }
+            //遍历dltest文件夹下所有插件
+            for (File plugin : plugins) {
+                //PluginItem是我自己定义的类
+                PluginItem item = new PluginItem();
+                item.pluginPath = plugin.getAbsolutePath();
+                //使用DlUtils获取插件包信息
+                item.packageInfo = DLUtils.getPackageInfo(this, item.pluginPath);
+                if (item.packageInfo.activities != null &amp;&amp; item.packageInfo.activities.length &gt; 0) {
+                    //得到插件的主activity
+                    item.launcherActivityName = item.packageInfo.activities[0].name;
+                }
+                if (item.packageInfo.services != null &amp;&amp; item.packageInfo.services.length &gt; 0) {
+                    item.launcherServiceName = item.packageInfo.services[0].name;
+                }
+                mPluginItems.add(item);
+                //加载插件，第二个参数为false，标识没有.so文件
+                DLPluginManager.getInstance(this).loadApk(item.pluginPath,false);
+            }
+
+            mListView.setAdapter(mPluginAdapter);
+            mListView.setOnItemClickListener(this);
+            mPluginAdapter.notifyDataSetChanged();
+        }
+</code></pre>
+
+<hr />
+<blockquote>
+<p>点击ListView中对应条目（会调起插件）</p>
+</blockquote>
+<pre><code>  @Override
+    public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+        PluginItem item = mPluginItems.get(position);
+        DLPluginManager pluginManager = DLPluginManager.getInstance(this);
+        //打开插件的中的Activity
+        pluginManager.startPluginActivity(this, new DLIntent(item.packageInfo.packageName, item.launcherActivityName));
+    }
+</code></pre>
+
+<hr />
+<h5>看看main_plugin_a插件中</h5>
+<pre><code>//继承dl框架中的DLBasePluginActivity
+public class MainActivity extends DLBasePluginActivity implements View.OnClickListener {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //正常使用布局文件
+        setContentView(R.layout.activity_main);
+        findViewById(R.id.btn_openSecond).setOnClickListener(this);
+        findViewById(R.id.btn_openService).setOnClickListener(this);
+        findViewById(R.id.btn_stopService).setOnClickListener(this);
+    }
+    //开启插件中另一个Activity
+    public void openSecond(){
+        startPluginActivity(new DLIntent(getPackageName(),SecondTestActivity.class));
+    }
+    //开启服务
+    private void openService() {
+        startPluginService(new DLIntent(getPackageName(),TestService.class));
+    }
+    //停止服务
+    private void stopService() {
+        stopPluginService(new DLIntent(getPackageName(),TestService.class));
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_openSecond:
+                openSecond();
+                break;
+            case R.id.btn_openService:
+                openService();
+                break;
+            case R.id.btn_stopService:
+                stopService();
+                break;
+        }
+    }
+}
+</code></pre>
+
+<blockquote>
+<p>在插件中，所有的Activity都要继承dl中的DLBasePluginActivity，所有的FragmentActivity都要继承dl中的DLBasePluginFragmentActivity，所有的service都要继承dl中的DLBasePluginService，具体使用请看demo即可</p>
+<p>开启Activity使用startPluginActivity(DLIntent)；开启服务使用startPluginService(DLIntent)；停止服务使用stopPluginService(DLIntent），当然也可以绑定服务的，有相关方法</p>
+</blockquote>
+<hr />
+<h5>看看main_plugin_b,插件b实现了与宿主的互相调用</h5>
+<blockquote>
+<p>插件b中</p>
+</blockquote>
+<pre><code>public class MainActivity extends DLBasePluginFragmentActivity {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        findViewById(R.id.btn_plugin_b).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //得到宿主实现的接口对象
+                IHost host = InterfaceManager.getHost();
+                if(host==null){
+                    Toast.makeText(MainActivity.this.that,&quot;hello&quot;, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //调用宿主方法
+                String hostMethod = host.hostMethod(that,&quot;在插件main_plugin_b中调用&gt;&gt;&quot;);
+                Toast.makeText(MainActivity.this.that, hostMethod, Toast.LENGTH_SHORT).show();
+            }
+        });
+        //传入插件b实现的接口对象，宿主得到后可以调用其方法
+        InterfaceManager.setPlugin(new IPlugin() {
+            @Override
+            public String pulginMethod(String s) {
+                return s+&quot;我是插件b&quot;;
+            }
+        });
+    }
+}
+</code></pre>
+
+<blockquote>
+<p>IHost、IPlugin和InterfaceManager没有在dl的library中，存在于我写的另一个library中，在这个类库中，主要定义插件和宿主之间调用的接口，demo中只是定义了一个简单的接口，详情请看demo中interactlib。</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>在宿主中调用插件b实现IPlugin接口的对象的方法</p>
+</blockquote>
+<pre><code> public void doActionWithPlugin(View view){
+        String s = InterfaceManager.getPlugin().pulginMethod(&quot;在host中调用&gt;&gt;&gt;&quot;);
+        Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+    }
+</code></pre>
+
+<hr />
+<h4>插件打包使用</h4>
+<p>插件应该从服务端下载，demo中为了演示方便，将插件APk通过adb命令push到了sdcard的dltest文件夹下</p>
+<p>task命令如下</p>
+<pre><code>def dlPath = '/sdcard/dltest'
+def upload = { -&gt;
+        try {
+            //创建dltest文件夹
+            exec {
+                commandLine 'E:/android_dev/sdk/sdk/platform-tools/adb.exe', 'shell', 'mkdir', dlPath
+            }
+        }
+        catch (ignored) {
+        }
+
+        try{
+            //将所有工程中生成的apk上传到dltest文件夹中
+            exec {
+                commandLine 'E:/android_dev/sdk/sdk/platform-tools/adb.exe', 'push', project.name + '-debug.apk', dlPath
+                workingDir project.projectDir.toString() + '/build/outputs/apk/'
+            }
+        }
+        catch (ignored){}
+    }
+
+    task uploadDebug &lt;&lt; {
+        upload()
+    }
+</code></pre>
+
+<p>最后执行uploadDebug任务即可</p>
+<p>在这里不用通过dx命令再次处理插件包了，是因为这里的插件包是apk文件，apk文件中的.class文件已经被处理过了</p>
+<hr />
+<h4>dl原理分析</h4>
+<h5>占坑</h5>
+<pre><code> &lt;activity android:name=&quot;com.ryg.dynamicload.DLProxyActivity&quot;/&gt;
+    &lt;activity android:name=&quot;com.ryg.dynamicload.DLProxyFragmentActivity&quot;/&gt;
+    &lt;service android:name=&quot;com.ryg.dynamicload.DLProxyService&quot;
+        android:enabled=&quot;true&quot;
+        android:exported=&quot;true&quot;/&gt;
+</code></pre>
+
+<blockquote>
+<p>插件中的Activity，FragmentActivity，service要分别继承dl的DLBasePluginActivity、DLBasePluginFragmentActivity和DLBasePluginService</p>
+<p>dl中的DLProxyActivity，DLProxyFragmentActivity，DLProxyService会代理插件中Activity，FragmentActivity，service的生命周期</p>
+</blockquote>
+<hr />
+<h5>插件中组件关联代理组件</h5>
+<p>以Activity为例：
+DLProxyActivity实现了DLAttachable接口</p>
+<pre><code>public interface DLAttachable {
+    public void attach(DLPlugin proxyActivity, DLPluginManager pluginManager);
+}
+</code></pre>
+
+<blockquote>
+<p>他调用attach方法将被代理的Activity传过来（插件中继承了DLBasePluginActivity的Activity）</p>
+</blockquote>
+<p>DLBasePluginActivity实现了DLPlugin,DLPlugin如下</p>
+<pre><code>public interface DLPlugin {
+
+    public void onCreate(Bundle savedInstanceState);
+    public void onStart();
+    public void onRestart();
+    public void onActivityResult(int requestCode, int resultCode, Intent data);
+    public void onResume();
+    public void onPause();
+    public void onStop();
+    public void onDestroy();
+    //调用这里的attach，将代理Activity传入到了DLBasePluginActivity中（插件中Activity）
+    public void attach(Activity proxyActivity, DLPluginPackage pluginPackage);
+    public void onSaveInstanceState(Bundle outState);
+    public void onNewIntent(Intent intent);
+    public void onRestoreInstanceState(Bundle savedInstanceState);
+    public boolean onTouchEvent(MotionEvent event);
+    public boolean onKeyUp(int keyCode, KeyEvent event);
+    public void onWindowAttributesChanged(LayoutParams params);
+    public void onWindowFocusChanged(boolean hasFocus);
+    public void onBackPressed();
+    public boolean onCreateOptionsMenu(Menu menu);
+    public boolean onOptionsItemSelected(MenuItem item);
+}
+</code></pre>
+
+<blockquote>
+<p>都是Activity的生命周期方法</p>
+</blockquote>
+<p>在DLProxyActivity中</p>
+<pre><code>@Override
+    protected void onStart() {
+        mRemoteActivity.onStart();
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        mRemoteActivity.onRestart();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        mRemoteActivity.onResume();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mRemoteActivity.onPause();
+        super.onPause();
+    }
+</code></pre>
+
+<blockquote>
+<p>摘出了部分代码，mRemoteActivity就是被代理的DLBasePluginActivity（插件中的Activity）</p>
+</blockquote>
+<hr />
+<h5>插件中为什么可以通过R来访问图片呢？</h5>
+<p>重写Activity中的 getAssets()和getResources()并返回自己的重写构建AssetManager，（AssetManager中对应的资源路径，改为插件路径即可）和由此生成的Resources即可，</p>
+<p>dl中体现如下：（DLPluginManager中）</p>
+<pre><code>  AssetManager assetManager = createAssetManager(dexPath);
+  Resources resources = createResources(assetManager);
+</code></pre>
+
+<hr />
+<pre><code>private AssetManager createAssetManager(String dexPath) {
+        try {
+            AssetManager assetManager = AssetManager.class.newInstance();
+            Method addAssetPath = assetManager.getClass().getMethod(&quot;addAssetPath&quot;, String.class);
+            addAssetPath.invoke(assetManager, dexPath);
+            return assetManager;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    private Resources createResources(AssetManager assetManager) {
+        Resources superRes = mContext.getResources();
+        Resources resources = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
+        return resources;
+    }
+</code></pre>
+
+<blockquote>
+<p>dexPath即为插件路径，例如：/sdcard/dltest/xxx.apk</p>
+</blockquote>
+<hr />
+<h5>怎样实例化插件中类的呢（DLPluginManager中）</h5>
+<pre><code> private DexClassLoader createDexClassLoader(String dexPath) {
+        File dexOutputDir = mContext.getDir(&quot;dex&quot;, Context.MODE_PRIVATE);
+        dexOutputPath = dexOutputDir.getAbsolutePath();
+        //初始化一个dexclassloader
+        DexClassLoader loader = new DexClassLoader(dexPath, dexOutputPath, mNativeLibDir, mContext.getClassLoader());
+        return loader;
+    }
+</code></pre>
+
+<hr />
+<pre><code>       DexClassLoader dexClassLoader = createDexClassLoader(dexPath);
+        AssetManager assetManager = createAssetManager(dexPath);
+        Resources resources = createResources(assetManager);
+        // create pluginPackage
+        pluginPackage = new DLPluginPackage(dexClassLoader, resources, packageInfo);
+        mPackagesHolder.put(packageInfo.packageName, pluginPackage);
+</code></pre>
+
+<blockquote>
+<p>每一个插件都会对应一个dexclassloder，生成的dexclassload会被封装到DLPluginPackage对象中，而这个对象会被放到以插件包名为键的map中，这样插件和dexclassloader就一一对应了</p>
+</blockquote>
+<hr />
+<pre><code>  protected void launchTargetActivity() {
+        try {
+            //根据类名生成一个插件中Activity的对象
+            Class&lt;?&gt; localClass = getClassLoader().loadClass(mClass);
+            Constructor&lt;?&gt; localConstructor = localClass.getConstructor(new Class[] {});
+            Object instance = localConstructor.newInstance(new Object[] {});
+            //生成的插件中Activity的对象
+            mPluginActivity = (DLPlugin) instance;
+            //代理Activity关联插件中的Activity
+            ((DLAttachable) mProxyActivity).attach(mPluginActivity, mPluginManager);
+            Log.d(TAG, &quot;instance = &quot; + instance);
+            // attach the proxy activity and plugin package to the mPluginActivity
+            //插件中Activity关联代理Activity
+            mPluginActivity.attach(mProxyActivity, mPluginPackage);
+
+            Bundle bundle = new Bundle();
+            bundle.putInt(DLConstants.FROM, DLConstants.FROM_EXTERNAL);
+            mPluginActivity.onCreate(bundle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+</code></pre>
+
+<blockquote>
+<p>上面是生成插件中Activity对象的过程，插件中service对象生成与关联代理的流程，是类似的，这个不过多讨论了</p>
+</blockquote>
+<hr />
+<h5>在插件中使用上下文时，慎用this</h5>
+<p>插件中的Activity最后是被当做普通的类，通过反射得到其实例的，系统不会管理器生命周期，通过this获取上下文已经不行了，但是dl为我们提供了关键字that，that会在不同的情况下，指向本Activity或者代理Activity，所以，在使用this行不通的情况下，可以使用that。</p>
+<hr />
+<h4>注意点</h4>
+<p>插件和宿主之间的桥梁其实是接口，如demo中宿主和插件b之间相互调用的接口，宿主和插件b都依赖了interactlib工程，但是插件b打包的时候，却不能包含任何接口文件，否者会报异常，demo中处理如下：</p>
+<pre><code>dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    //去除v7中的v4包，防止跟宿主v4冲突
+    compile('com.android.support:appcompat-v7:23.4.0') {
+        exclude module: 'support-v4'
+    }
+    compile project(':dllib')
+    //私有引用，打包时不会包含
+    provided files('../interactlib/build/libs/interactlib.jar')
+}
+</code></pre>
+
+<blockquote>
+<p>上面是插件b的dependencies</p>
+</blockquote>
+<hr />
+<p>以上就是dl的使用方法，还有它的原理解析，具体使用还是请参考demo，</p>
+<h5>更多学习&gt;&gt;dl 源码地址：</h5>
+<h5>https://github.com/singwhatiwanna/dynamic-load-apk</h5>
+<h5>欢迎关注andoop,周一、二内容更新，干货永不断！</h5>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
